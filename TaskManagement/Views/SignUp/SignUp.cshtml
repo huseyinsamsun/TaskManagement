@@ -1,0 +1,43 @@
+﻿@model UserForRegisterDto
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<h2>@ViewBag.status</h2>
+
+    <form asp-controller="SignUp"  asp-action="SignUp" method="post">
+                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group first">
+                    <label asp-for="FirstName">Adınız</label>
+                    <input asp-for="FirstName" class="form-control" > 
+                  
+                </div>
+
+                <div class="form-group first">
+                    <label asp-for="LastName">Soyadınız</label>
+                    <input asp-for="LastName" class="form-control" > 
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+              </div>
+
+              <div class="form-group last mb-4">
+                <label asp-for="EMail">Mail Adresiniz</label>
+                <input asp-for="EMail" class="form-control" > 
+                <span asp-validation-for="EMail" class="text-danger"></span>
+              </div>
+
+              <div class="form-group last mb-4">
+                <label asp-for="UserName">Kullanıcı Adınız</label>
+                <input asp-for="UserName" class="form-control" > 
+                <span asp-validation-for="UserName" class="text-danger"></span>
+              </div>
+                  <div class="form-group last mb-4">
+                  <label asp-for="Password">Parola</label>
+                  <input asp-for="Password" class="form-control" type="password">
+                  <span asp-validation-for="Password" class="text-danger"></span>
+              </div>
+             <input type="submit" value="Kayıt Ol" class="btn btn-block btn-primary">
+  </form>

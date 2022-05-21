@@ -1,0 +1,75 @@
+﻿@model UserForLoginDto
+@{
+    ViewData["Title"] = "LogInUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Home_root/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/Home_root/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Home_root/css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Home_root/css/style.css">
+
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="mb-4">
+                                <h3>ÜYE GİRİŞİ</h3>
+                                <p class="mb-4">Lütfen Bilgilerinizi Giriniz.</p>
+                            </div>
+                            <form asp-controller="LogIn" asp-action="LogInUser" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group first">
+                                    <label asp-for="EMail">Mail Adresi</label>
+                                    <input asp-for="EMail" class="form-control">
+                                    <span asp-validation-for="EMail" class="text-danger"></span>
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label asp-for="Password">Şifreyi Giriniz</label>
+                                    <input asp-for="Password" class="form-control" type="password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-action="RememberMe">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Beni Hatırla
+                                    </label>
+                                </div>
+           
+                                <input type="submit" value="Giriş Yap" class="btn btn-block btn-primary">
+                             
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/Home_root/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Home_rootjs/popper.min.js"></script>
+    <script src="~/Home_rootjs/bootstrap.min.js"></script>
+    <script src="~/Home_rootjs/main.js"></script>
+</body>
+</html>

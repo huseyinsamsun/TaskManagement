@@ -1,0 +1,19 @@
+﻿@model CompletedTaskDto
+@{
+    ViewData["Title"] = "CompletedTask";
+    Layout = "~/Views/Shared/_Employee.cshtml";
+}
+
+<h1>Tebrikler !</h1>
+
+<form class="form-group"  asp-action="CompletedTask" asp-controller="Employee" method="post" enctype="multipart/form-data"> 
+
+        <div class="form-group">
+                <label asp-for="EndDescription" class="control-label">Aldığınız Aksiyonlar</label>
+                <input asp-for="EndDescription" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="file" asp-for="DocumentName"  />
+            </div>
+            <button class="btn btn-success" >Kaydet</button>
+</form>

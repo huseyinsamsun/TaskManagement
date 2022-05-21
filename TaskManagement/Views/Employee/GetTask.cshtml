@@ -1,0 +1,260 @@
+﻿@using TaskManagement.EnumExtensionsManager
+@using Entities.Abstract
+@model List<UserTaskForEmployeeDto>
+@{
+    ViewData["Title"] = "GetTask";
+    Layout = "~/Views/Shared/_Manager.cshtml";
+}
+
+<h1>GetTask</h1>
+
+<table class="table table-danger">
+    <thead>
+        <tr>
+
+            <th>Task Adı</th>
+            <th>Task Önceliği</th>
+          
+            <th>Task Durumu</th>
+              <th>Bitirilmesi Gereken Tarih</th>
+            <th>Durum Opsiyonları</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+
+            @if (item.Priotrity == PriotrityEnums.Do)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Do)</td>
+                    @if (@item.Status == StatusEnums.Wait)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Wait)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Continuing)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Continuing)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Completed)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
+                    }
+                    <td>@item.CompletionTime</td>
+                    <td style="width:180px">
+
+                        <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
+                            <select name="enumValue" class="form-control" asp-items=" Html.GetEnumSelectList<StatusEnums>()">
+                                <option selected="selected"> Durum seçiniz </option>
+                            </select>
+                            <div class="form-group">
+
+                                <input asp-for="@item.Taskİd" name="taskİd" type="hidden" class="form-control" />
+
+                            </div>
+
+
+                            <input class="btn btn-success" type="submit" value="Durumu Değiştir" />
+
+                        </form>
+                    </td>
+                </tr>
+
+
+            }
+        }
+
+
+    </tbody>
+</table>
+
+
+
+
+<table class="table table-warning">
+    <thead>
+        <tr>
+
+            <th scope="col">Task Adı</th>
+            <th scope="col">Task Önceliği</th>
+            <th scope="col">Task Durumu</th>
+               <th>Bitirilmesi Gereken Tarih</th>
+            <th>Durum Opsiyonları</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+
+            @if (item.Priotrity == PriotrityEnums.Schedule)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Schedule)</td>
+                    @if (@item.Status == StatusEnums.Wait)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Wait)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Continuing)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Continuing)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Completed)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
+                    }
+                          <td>@item.CompletionTime</td>
+                    <td style="width:180px">
+
+                        <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
+                            <select name="enumValue" class="form-control" asp-items=" Html.GetEnumSelectList<StatusEnums>()">
+                                <option selected="selected"> Durum seçiniz </option>
+                            </select>
+                            <div class="form-group">
+
+                                <input asp-for="@item.Taskİd" name="taskİd" type="hidden" class="form-control" />
+
+                            </div>
+
+
+                            <input class="btn btn-success" type="submit" value="Durumu Değiştir" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
+
+
+
+
+<table class="table table-secondary">
+    <thead>
+        <tr>
+
+            <th scope="col">Task Adı</th>
+            <th scope="col">Task Önceliği</th>
+            <th scope="col">Task Durumu</th>
+                 <th>Bitirilmesi Gereken Tarih</th>
+            <th>Durum Opsiyonları</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+
+            if (item.Priotrity == PriotrityEnums.Delegate)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Delegate)</td>
+                    @if (@item.Status == StatusEnums.Wait)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Wait)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Continuing)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Continuing)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Completed)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
+                    }
+                          <td>@item.CompletionTime</td>
+                    <td style="width:180px">
+
+                        <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
+                            <select name="enumValue" class="form-control" asp-items=" Html.GetEnumSelectList<StatusEnums>()">
+                                <option selected="selected"> Durum seçiniz </option>
+                            </select>
+                            <div class="form-group">
+
+                                <input asp-for="@item.Taskİd" name="taskİd" type="hidden" class="form-control" />
+
+                            </div>
+
+
+                            <input class="btn btn-success" type="submit" value="Durumu Değiştir" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
+
+
+
+<table class="table table-success">
+    <thead>
+        <tr>
+
+            <th scope="col">Task Adı</th>
+            <th scope="col">Task Önceliği</th>
+            <th scope="col">Task Durumu</th>
+            <th>Bitirilmesi Gereken Tarih</th>
+            <th>Durum Opsiyonları</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+
+            if (item.Priotrity == PriotrityEnums.Delete)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Delete)</td>
+                    @if (@item.Status == StatusEnums.Wait)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Wait)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Continuing)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Continuing)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Completed)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
+                    }
+                          <td>@item.CompletionTime</td>
+                    <td style="width:180px">
+
+                        <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
+                            <select name="enumValue" class="form-control" asp-items=" Html.GetEnumSelectList<StatusEnums>()">
+                                <option selected="selected"> Durum seçiniz </option>
+                            </select>
+                            <div class="form-group">
+
+                                <input asp-for="@item.Taskİd" name="taskİd" type="hidden" class="form-control" />
+
+                            </div>
+
+
+                            <input class="btn btn-success" type="submit" value="Durumu Değiştir" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
+
+
+
+

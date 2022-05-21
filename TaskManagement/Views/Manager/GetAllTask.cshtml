@@ -1,0 +1,74 @@
+﻿@using Entities.Abstract
+@using TaskManagement.EnumExtensionsManager
+@model List<GetAllTaskDto>
+
+@{
+    ViewData["Title"] = "GetAllTask";
+    Layout = "~/Views/Shared/_Manager.cshtml";
+}
+
+<h1>Bütün Tasklar</h1>
+<table class="table table-bordered table-striped">
+    <tr>
+
+        <th>Tam İsmi</th>
+        <th>Task Başlığı</th>
+        <th>Task İçeriği</th>
+        <th>Durumu</th>
+        <th>Öncelik</th>
+        <th>Bitirilmesi Gereken Zaman</th>
+        <th>İletilen Döküman</th>
+        <th>İletilen Aksiyon</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan=3>Bir şey bulunmamaktadır</td>
+        </tr>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.Title</td>
+                <td>@item.ContentTask</td>
+                   @if (@item.Status == StatusEnums.Wait)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Wait)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Continuing)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Continuing)</td>
+                    }
+                    else if (@item.Status == StatusEnums.Completed)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
+                    }
+               @if (@item.Priotrity == PriotrityEnums.Do)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Do)</td>
+                    }
+                    else if (@item.Priotrity == PriotrityEnums.Schedule)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Schedule)</td>
+                    }
+                    else if (@item.Priotrity == PriotrityEnums.Delegate)
+                    {
+                        <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Delegate)</td>
+                    }
+                    else
+                {
+                        <td>@EnumExtensions.GetDisplayName(PriotrityEnums.Delete)</td> 
+                }
+          
+                <td>@item.CompleteTime</td>
+                <td>@item.DocumentName</td>
+                <td>@item.EndDescription</td>
+
+
+            </tr>
+        }
+    }
+</table>

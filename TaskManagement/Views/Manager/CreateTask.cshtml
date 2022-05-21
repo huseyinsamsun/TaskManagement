@@ -1,0 +1,32 @@
+﻿@model CreateTaskDto
+@{
+    ViewData["Title"] = "CreateTask";
+    Layout = "~/Views/Shared/_Manager.cshtml";
+}
+
+<h1>Task Oluştur</h1>
+
+<form asp-action="CreateTask">
+
+       <div class="form-group">
+                <label asp-for="Title" class="control-label">Başlık</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+              <div class="form-group">
+                <label asp-for="ContentTask" class="control-label">İçerik</label>
+                <input asp-for="ContentTask" class="form-control" />
+            </div>
+                <div class="form-group">
+                <label asp-for="CompletionTime" class="control-label">Bitirilme Zamanı</label>
+                <input asp-for="CompletionTime" class="form-control" />
+           
+            </div>
+                <div class="form-group">
+                <label asp-for="DocumentName" class="control-label">Dosya</label>
+                <input asp-for="DocumentName" class="form-control" />
+             
+            </div>
+              <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+</form>
