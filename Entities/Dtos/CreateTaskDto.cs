@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Entities.Dtos
         public string ContentTask { get; set; }
         public DateTime CompletionTime { get; set; }
 
-        public string DocumentName { get; set; }
+        public  IFormFile DocumentName { get; set; }
     
     }
 }

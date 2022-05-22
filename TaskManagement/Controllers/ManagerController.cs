@@ -1,11 +1,14 @@
 ﻿using Business.Abstract;
+using Core.Helper;
 using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,9 +95,35 @@ namespace TaskManagement.Controllers
 
             return View(roleCreateDto);
         }
+        public IActionResult AddEmployee()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee(EmployeeAddDto employeeAddDto)
+        {
+            AppUser user = new AppUser();
+            user.FirstName=employeeAddDto.FirstName;
+            user.LastName = employeeAddDto.LastName;
+            user.Email = employeeAddDto.Email;
+            user.UserName = employeeAddDto.UserName;
+            IdentityResult result = await _userManager.CreateAsync(user, employeeAddDto.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Personel");
+            }
+            else
+            {
+                AddModelError(result);
+            }
+            return RedirectToAction("AddEmployee");
+        }
+
+
         public IActionResult EmployeeList()
         {
-            return View(_userManager.Users.ToList());
+            AppUser appUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            return View(_userManager.Users.ToList().Where(x=>x.Id!=appUser.Id).ToList());
         }
         public IActionResult Roles()
         {
@@ -161,24 +190,36 @@ namespace TaskManagement.Controllers
         {
             TaskProject task = new TaskProject();
             task.Title = createTaskDto.Title;
-            if (createTaskDto.CompletionTime<System.DateTime.Now)
+            if (createTaskDto.CompletionTime<DateTime.Now)
             {
-                task.CompletionTime = System.DateTime.Now.AddDays(5);
+                task.CompletionTime =DateTime.Now.AddDays(5);
             }
             else
             {
                 task.CompletionTime = createTaskDto.CompletionTime;
             }
-          
+            if (createTaskDto.DocumentName != null)
+            {
+                var extension = Path.GetExtension(createTaskDto.DocumentName.FileName);
+                var newimagename = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/dosyalar/", newimagename);
+                var stream = new FileStream(location, FileMode.Create);
+                createTaskDto.DocumentName.CopyTo(stream);
+                task.DocumentName = newimagename;
+
+            }
+
             task.ContentTask = createTaskDto.ContentTask;
-            task.DocumentName = createTaskDto.DocumentName;
+
           
             _task.Add(task);
                 
-            return View(createTaskDto);
+            return RedirectToAction("CreateTask","Manager");
         }
         public IActionResult AssignTask(string id)
         {
+            var result = _userManager.FindByIdAsync(id).Result;
+            ViewBag.FullName = result.FirstName + " " + result.LastName;
             TempData["id"] = id;
            var  taskList = _task.GetList().ToList();
             Dictionary<int, string> task = new Dictionary<int, string>();
@@ -195,13 +236,17 @@ namespace TaskManagement.Controllers
         [HttpPost]
         public IActionResult AssignTask(AssignTaskForUserDto assignTaskForUserDto)
         {
+            AppUser appUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
+         var result=_userManager.FindByIdAsync(TempData["id"].ToString()).Result;
             UserTaskDto userTaskDto = new UserTaskDto();
             userTaskDto.UserId = TempData["id"].ToString();
             userTaskDto.TaskId = assignTaskForUserDto.TaskId;
             userTaskDto.Priotrity = assignTaskForUserDto.Priotrity;
+            userTaskDto.ManagerId = appUser.Id;
+            NewTaskHelper.NewTaskEmail(result.Email);
             _userTaskService.Add(userTaskDto);
 
-            return View();
+            return  RedirectToAction("AssignTask", "Manager");
         }
 
 

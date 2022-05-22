@@ -3,10 +3,10 @@
 @model List<UserTaskForEmployeeDto>
 @{
     ViewData["Title"] = "GetTask";
-    Layout = "~/Views/Shared/_Manager.cshtml";
+    Layout = "~/Views/Shared/_Employee.cshtml";
 }
 
-<h1>GetTask</h1>
+<h1>Tasklerim</h1>
 
 <table class="table table-danger">
     <thead>
@@ -14,9 +14,10 @@
 
             <th>Task Adı</th>
             <th>Task Önceliği</th>
-          
+
             <th>Task Durumu</th>
-              <th>Bitirilmesi Gereken Tarih</th>
+            <th>Bitirilmesi Gereken Tarih</th>
+            <th>Dosya</th>
             <th>Durum Opsiyonları</th>
         </tr>
     </thead>
@@ -43,6 +44,16 @@
                         <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
                     }
                     <td>@item.CompletionTime</td>
+                       @if (item.DocumentName!=null)
+                    {
+                    <td><a class="btn btn-outline-primary"  href="~/dosyalar/@item.DocumentName" target="_blank">Dosyayı Gör </a></td>
+                    }
+                    else
+                    {
+                              <td>Dosya bulunmamaktadır</td>   
+                    }
+               
+
                     <td style="width:180px">
 
                         <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
@@ -80,7 +91,8 @@
             <th scope="col">Task Adı</th>
             <th scope="col">Task Önceliği</th>
             <th scope="col">Task Durumu</th>
-               <th>Bitirilmesi Gereken Tarih</th>
+            <th>Bitirilmesi Gereken Tarih</th>
+            <th>Dosya</th>
             <th>Durum Opsiyonları</th>
         </tr>
     </thead>
@@ -107,7 +119,17 @@
                     {
                         <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
                     }
-                          <td>@item.CompletionTime</td>
+                    <td>@item.CompletionTime</td>
+                       @if (item.DocumentName!=null)
+                    {
+                    <td><a class="btn btn-outline-primary"  href="~/dosyalar/@item.DocumentName" target="_blank">Dosyayı Gör </a></td>
+                    }
+                    else
+                    {
+                                  <td>Dosya bulunmamaktadır</td> 
+                    }
+             
+
                     <td style="width:180px">
 
                         <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
@@ -142,7 +164,8 @@
             <th scope="col">Task Adı</th>
             <th scope="col">Task Önceliği</th>
             <th scope="col">Task Durumu</th>
-                 <th>Bitirilmesi Gereken Tarih</th>
+            <th>Bitirilmesi Gereken Tarih</th>
+            <th>Dosya</th>
             <th>Durum Opsiyonları</th>
         </tr>
     </thead>
@@ -169,7 +192,19 @@
                     {
                         <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
                     }
-                          <td>@item.CompletionTime</td>
+                    <td>@item.CompletionTime</td>
+                       @if (item.DocumentName!=null)
+                    {
+                    <td><a class="btn btn-outline-primary"  href="~/dosyalar/@item.DocumentName" target="_blank">Dosyayı Gör </a></td>
+                    }
+                    else
+                    {    
+                        
+                        <td>Dosya bulunmamaktadır</td>
+                            
+                    }
+               
+    
                     <td style="width:180px">
 
                         <form method="post" asp-controller="Employee" asp-action="ChangeStatus">
@@ -204,6 +239,7 @@
             <th scope="col">Task Önceliği</th>
             <th scope="col">Task Durumu</th>
             <th>Bitirilmesi Gereken Tarih</th>
+            <th>Dosya</th>
             <th>Durum Opsiyonları</th>
         </tr>
     </thead>
@@ -230,7 +266,17 @@
                     {
                         <td>@EnumExtensions.GetDisplayName(StatusEnums.Completed)</td>
                     }
-                          <td>@item.CompletionTime</td>
+                    <td>@item.CompletionTime</td>
+                    @if (item.DocumentName!=null)
+                    {
+                    <td><a class="btn btn-outline-primary"  href="~/dosyalar/@item.DocumentName" target="_blank">Dosyayı Gör </a></td>
+                    }
+                    else
+                    {
+                          <td>Dosya bulunmamaktadır</td>
+                    }
+                  
+  
                     <td style="width:180px">
 
                         <form method="post" asp-controller="Employee" asp-action="ChangeStatus">

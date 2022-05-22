@@ -55,7 +55,8 @@ namespace TaskManagement.Controllers
                               ut.Status,
                               ut.Priotrity,
                               ut.EndDescription,
-                              t.CompletionTime
+                              t.CompletionTime,
+                              t.DocumentName
 
 
 
@@ -72,7 +73,9 @@ namespace TaskManagement.Controllers
                     Taskİd=item.TaskId,
                     Title= item.Title,
                     Status=item.Status,
-                     Priotrity = item.Priotrity
+                     Priotrity = item.Priotrity,
+                     DocumentName=item.DocumentName
+                     
                 });
                
             }
@@ -89,6 +92,7 @@ namespace TaskManagement.Controllers
             userTask.UserId=appUser.Id;
             userTask.TaskId = taskİd;
             userTask.Priotrity = result.Priotrity;
+            userTask.ManagerId = result.ManagerId;
             TempData["taskid"] = taskİd;
       
    
@@ -124,11 +128,16 @@ namespace TaskManagement.Controllers
             {
                 if (result.Status!=StatusEnums.Completed)
                 {
-                    CompletedTaskHelper.CompletedTaskEmail()
+                   
 
 
                     userTask.Status = StatusEnums.Completed;
                     _userTaskService.Update(userTask);
+                    var manager= _userManager.FindByIdAsync(result.ManagerId).Result;
+ 
+                   CompletedTaskHelper.CompletedTaskEmail(manager.Email);
+             
+                  
                     return RedirectToAction("CompletedTask", "Employee");
                 }
                 return RedirectToAction("GetTask", "Employee");

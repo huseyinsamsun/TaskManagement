@@ -15,6 +15,7 @@ namespace Entities.Concrete
         public PriotrityEnums Priotrity { get; set; }
         public string DocumentName { get; set; }
         public string EndDescription { get; set; }
+        public string ManagerId { get; set; }
         public virtual AppUser AppUser { get; set; }
         public virtual TaskProject TaskProject { get; set; }
   

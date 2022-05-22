@@ -18,17 +18,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item p-2">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="RoleCreate">Rol Oluştur</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item p-2">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="EmployeeList">Personeller</a>
                         </li>
-                         <li class="nav-item">
+                         <li class="nav-item p-2">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="CreateTask">Task Oluştur</a>
                         </li>
-                             <li class="nav-item">
+                             <li class="nav-item p-2">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="GetAllTask">Tüm Atanmış Tasklar</a>
+                        </li>
+                            </li>
+                             <li class="nav-item p-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="AddEmployee">Personel Ekle</a>
+                        </li>
+                         
+                             <li class="nav-item ml-auto p-2">
+                            <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="LogOut"  asp-route-returnUrl="/LogIn/LogInUser">Çıkış Yap</a>
                         </li>
                     </ul>
                 </div>

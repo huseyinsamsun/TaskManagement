@@ -14,6 +14,7 @@ namespace Entities.Dtos
         public StatusEnums Status { get; set; }
         public PriotrityEnums Priotrity { get; set; }
         public DateTime CompletionTime { get; set; }
+        public string DocumentName { get; set; }
 
 
     }
