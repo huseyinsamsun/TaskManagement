@@ -45,7 +45,7 @@ namespace TaskManagement.Controllers
                                 return Redirect(TempData["ReturnUrl"].ToString());
                             }
 
-                            return RedirectToAction("Index", "Manager");
+                            return RedirectToAction("EmployeeList", "Manager");
                         }
                         else if (item.Contains("Personel"))
                         {
@@ -53,10 +53,10 @@ namespace TaskManagement.Controllers
                             {
                                 return Redirect(TempData["ReturnUrl"].ToString());
                             }
-                            return RedirectToAction("Index", "Employee");
+                            return RedirectToAction("GetTask", "Employee");
                         }
                     }
-                    return RedirectToAction("Index", "Manager");
+                    return RedirectToAction("EmployeeList", "Manager");
 
 
                 }
