@@ -94,6 +94,7 @@ namespace TaskManagement.Controllers
             userTask.Priotrity = result.Priotrity;
             userTask.ManagerId = result.ManagerId;
             TempData["taskid"] = taskİd;
+            //
       
    
             
